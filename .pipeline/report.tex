@@ -1,8 +1,8 @@
-%% AIML Engineering Lab - Project Report (v3)
+%% AIML Engineering Lab - Project Report (v5)
 %% Placeholders are replaced by generate_content.py
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[a4paper, margin=2cm, top=2.2cm, bottom=2cm]{geometry}
+\usepackage[a4paper, margin=2cm, top=1.5cm, bottom=1.5cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -21,16 +21,16 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{caption}
-\usepackage{subcaption}
-\usepackage{tikz}
 \usepackage{tcolorbox}
 \usepackage{needspace}
 \tcbuselibrary{skins,breakable}
-\usetikzlibrary{arrows.meta, positioning}
 
 %% ── Colour palette ─────────────────────────────────────────────────────────
 \definecolor{primary}{HTML}{1A1A2E}
 \definecolor{accent}{HTML}{0F3460}
+\definecolor{titleblue}{HTML}{2E86C1}
+\definecolor{headingblue}{HTML}{2196F3}
+\definecolor{subheadblue}{HTML}{42A5F5}
 \definecolor{codemuted}{HTML}{6B7280}
 \definecolor{metricgreen}{HTML}{16A34A}
 \definecolor{tableheader}{HTML}{D0E8F7}
@@ -42,114 +42,72 @@
   linkcolor=accent,
   urlcolor=accent,
   citecolor=accent,
-  pdftitle={Hyperparameter Optimization Strategies},
+  pdftitle={Hyperparameter Optimization},
   pdfauthor={AIML Engineering Lab},
 }
 
-\setstretch{1.18}
-\setlength{\parskip}{6pt}
+\setstretch{1.08}
+\setlength{\parskip}{3pt}
 \setlength{\parindent}{0pt}
 
 \titleformat{\section}
-  {\large\bfseries\color{accent}}
+  {\large\bfseries\color{headingblue}}
   {\thesection}{1em}{}[\color{tableheader}\titlerule]
 \titleformat{\subsection}
-  {\normalsize\bfseries\color{primary}}
+  {\normalsize\bfseries\color{subheadblue}}
   {\thesubsection}{0.8em}{}
-\titlespacing{\section}{0pt}{16pt}{6pt}
-\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\section}{0pt}{8pt}{3pt}
+\titlespacing{\subsection}{0pt}{6pt}{2pt}
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\color{codemuted}Project 010}
-\fancyhead[R]{\small\color{codemuted}Hyperparameter Optimization Strategies}
+\fancyhead[R]{\small\color{codemuted}Hyperparameter Optimization}
 \fancyfoot[C]{\small\color{codemuted}\thepage}
 \renewcommand{\headrulewidth}{0.2pt}
 
 \newtcolorbox{resultbox}{
   colback=lightblue, colframe=tableheader,
-  boxrule=0.4pt, arc=4pt, left=10pt, right=10pt, top=6pt, bottom=6pt
+  boxrule=0.4pt, arc=4pt, left=10pt, right=10pt, top=3pt, bottom=3pt
 }
 
 \begin{document}
 
-%% ── COVER PAGE ─────────────────────────────────────────────────────────────
+%% ── PAGE 1: Title + Overview ───────────────────────────────────────────────
 \thispagestyle{empty}
 
-\begin{tikzpicture}[remember picture, overlay]
-  \fill[primary] (current page.north west)
-    rectangle ([yshift=-48pt]current page.north east);
-\end{tikzpicture}
-
-\vspace*{22pt}
-{\color{white}\large\bfseries AIML Engineering Lab}
-
-\vspace{50pt}
-
-\begin{flushright}
-  {\fontsize{9}{11}\selectfont\color{codemuted}PROJECT 010}
-\end{flushright}
-
-{\fontsize{26}{32}\selectfont\bfseries\color{primary} Hyperparameter Optimization Strategies}
+{\colorbox{primary}{\makebox[\dimexpr\linewidth-2\fboxsep][l]{\color{white}\bfseries\normalsize\hspace{6pt}AIML Engineering Lab}}}
 
 \vspace{6pt}
-{\large\color{accent} Explore and compare cutting-edge methods for hyperparameter tuning across critical regression tasks.}
 
-\vspace{14pt}
-{\color{tableheader}\rule{\linewidth}{0.6pt}}
+{\fontsize{9}{11}\selectfont\color{codemuted}PROJECT 010}
 
-\vspace{16pt}
-This project explores three hyperparameter optimization strategies—Grid Search, Random Search, and Bayesian Optimization using Optuna—to enhance model performance in two regression tasks. By systematically optimizing hyperparameters, significant improvements were observed in prediction accuracy across different datasets.
+\vspace{1pt}
+{\fontsize{22}{27}\selectfont\bfseries\color{titleblue} Hyperparameter Optimization}
 
-\vspace{12pt}
-\begin{resultbox}
-  \textbf{\color{accent}Key Result}\quad
-  {\large\bfseries\color{metricgreen}R² = 0.9741 on the 3D Printer Extrusion Quality dataset}
-\end{resultbox}
+\vspace{2pt}
+{\normalsize\color{accent} Mastering Grid, Random, and Bayesian Optimization for ML performance.}
 
-\vfill
+\vspace{4pt}
+{\color{tableheader}\rule{\linewidth}{0.4pt}}
 
-\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
-  \arrayrulecolor{tableheader}
-  \toprule
-  \rowcolor{tableheader} Info & Detail \\
-  \midrule
-  \rowcolor{white} GitHub & \href{https://github.com/AIML-Engineering-Lab/010_hyperparameter_optimization}{\nolinkurl{https://github.com/AIML-Engineering-Lab/010_hyperparameter_optimization}} \\
-  \rowcolor{tablerow} Tech Stack & Python 3.11, scikit-learn, pandas, Matplotlib \\
-  \rowcolor{white} Licence & MIT \\
-  \bottomrule
-\end{tabularx}
+\vspace{3pt}
 
-\newpage
-
-%% ── 1. PROJECT OVERVIEW ────────────────────────────────────────────────────
 \section{Project Overview}
 
-Effective hyperparameter optimization is crucial for building robust machine learning models, particularly when executing complex regression tasks. This project addresses the need for efficient hyperparameter tuning in the context of two significant real-world tasks: improving the quality of 3D-printed parts and minimizing PLL loop filter lock time during post-silicon validation. By implementing Grid Search, Random Search, and Bayesian Optimization using the Optuna framework, we could refine machine learning models that exhibit both speed and accuracy in their predictions. 
+I tackled two regression problems using Grid Search, Random Search, and Bayesian Optimization (Optuna). My goal was to optimize hyperparameters for improved model performance, yielding an R² of 0.9741 on the 3D Printer dataset and 0.9733 on the PLL Loop Filter dataset. These strategies showed distinct advantages depending on the search space.
 
-Our approach involved exhaustive tuning of hyperparameters across both datasets, utilizing 5-dimensional search spaces for optimal parameter settings. For the 3D printer extrusion quality dataset, we aimed to maximize print quality score (ranging from 0 to 1) based on features like temperature, speed, and layer height. Concurrently, for the PLL loop filter tuning, our goal was to minimize the lock time expressed in microseconds (µs). The use of Optuna introduced advanced techniques such as surrogate modeling and intelligent sampling, which allowed for efficient exploration of complex parameter landscapes, resulting in improved model performance metrics.
+\textbf{Grid Search:} Exhaustively tests every parameter combination.
 
-The results demonstrated significant advancements in R² values, indicating excellent explanatory power of our models. Both methodologies were rigorously compared, providing insights into their effectiveness and efficiency in hyperparameter optimization, ultimately driving better model performance in the targeted tasks.
+\textbf{Random Search:} Samples parameter combinations randomly for exploration.
 
-\subsection{Key Concepts}
+\textbf{Bayesian Optimization:} Utilizes surrogate models for efficient searching.
 
-\textbf{Grid Search:} An exhaustive technique that systematically evaluates every combination of hyperparameters in the defined search space.
-
-\textbf{Random Search:} This method involves sampling a fixed number of random combinations of hyperparameters, allowing for quicker explorations of larger spaces compared to grid search.
-
-\textbf{Bayesian Optimization:} A probabilistic model-based approach which builds a surrogate model to guide the search for optimal parameters, focusing on areas in the parameter space likely to produce better results.
-
-\textbf{Optuna:} An automated hyperparameter optimization framework that applies advanced strategies like tree-structured Parzen estimators (TPE) for effective searching.
-
-\textbf{Parameter Importance:} A technique used to identify which hyperparameters significantly impact model performance, providing insights into model interpretability.
-
-\textbf{Surrogate Models:} Statistical models that approximate the true objective function used in Bayesian optimization to predict outcomes based on hyperparameter inputs.
-
-\textbf{Acquisition Functions:} Functions that decide where to sample in the hyperparameter space based on prior evaluations, optimizing the balance of exploration and exploitation.
+\textbf{Optuna:} State-of-the-art framework for hyperparameter optimization.
 
 
-%% ── 2. DATASETS ────────────────────────────────────────────────────────────
-\needspace{14\baselineskip}
+%% ── DATASETS ───────────────────────────────────────────────────────────────
+\needspace{8\baselineskip}
 \section{Datasets}
 
 \subsection{3D Printer Extrusion Quality}
@@ -159,16 +117,16 @@ The results demonstrated significant advancements in R² values, indicating exce
   \toprule
   \rowcolor{tableheader} Property & Value \\
   \midrule
-  \rowcolor{white} Description & This dataset comprises 5,000 records detailing print quality scores influenced by three key parameters: temperature, speed, and layer height. It captures essential features affecting the quality of 3D printed objects, making it instrumental for optimization tasks. \\
+  \rowcolor{white} Description & Dataset focuses on the quality of 3D prints based on operational parameters. \\
   \rowcolor{tablerow} Total Rows & 5,000 \\
-  \rowcolor{white} Columns & 4 columns (3 features + 1 target) \\
-  \rowcolor{tablerow} Features & temperature, speed, layer\_height \\
-  \rowcolor{white} Class Balance & Continuous target range 0-1 (print quality score) \\
-  \rowcolor{tablerow} Train / Test Split & 80\% train / 20\% test \\
+  \rowcolor{white} Columns & 4 (3 features + 1 target) \\
+  \rowcolor{tablerow} Features & Temperature, Speed, Layer Height \\
+  \rowcolor{white} Class Balance & Continuous target, 0-1 scale \\
+  \rowcolor{tablerow} Train / Test Split & 80/20 \\
   \bottomrule
 \end{tabularx}
 
-\vspace{10pt}
+\vspace{6pt}
 
 \subsection{PLL Loop Filter Tuning}
 
@@ -177,16 +135,16 @@ The results demonstrated significant advancements in R² values, indicating exce
   \toprule
   \rowcolor{tableheader} Property & Value \\
   \midrule
-  \rowcolor{white} Description & This dataset contains 5,000 instances of PLL tuning parameters aimed at optimizing phase-locked loop performance. The target variable is the lock time measured in microseconds, crucial for ensuring correct signal locking in electronic applications. \\
+  \rowcolor{white} Description & Dataset aimed at tuning phase-locked loop parameters post-silicon. \\
   \rowcolor{tablerow} Total Rows & 5,000 \\
-  \rowcolor{white} Columns & 6 columns (5 features + 1 target) \\
-  \rowcolor{tablerow} Features & PWM\_frequency, VCO\_gain, loop\_bandwidth, damping\_factor \\
-  \rowcolor{white} Class Balance & Continuous target range 5-50 µs (lock time) \\
-  \rowcolor{tablerow} Train / Test Split & 80\% train / 20\% test \\
+  \rowcolor{white} Columns & 4 (3 features + 1 target) \\
+  \rowcolor{tablerow} Features & PLL Parameters \\
+  \rowcolor{white} Class Balance & Continuous, microseconds \\
+  \rowcolor{tablerow} Train / Test Split & 80/20 \\
   \bottomrule
 \end{tabularx}
 
-%% ── 3. METHODOLOGY ─────────────────────────────────────────────────────────
+%% ── METHODOLOGY ────────────────────────────────────────────────────────────
 \section{Methodology}
 
 \subsection{Algorithms Used}
@@ -196,33 +154,21 @@ The results demonstrated significant advancements in R² values, indicating exce
   \toprule
   \rowcolor{tableheader} Algorithm & Description \\
   \midrule
-  \rowcolor{white} Linear Regression & Initial regression model providing a baseline for performance evaluation. \\
-  \rowcolor{tablerow} Ridge Regression & Regularized variant of linear regression, used to mitigate multicollinearity and improve model generalization. \\
-  \rowcolor{white} Lasso Regression & Another regularized regression method capable of feature selection, offering simplicity in model interpretation. \\
-  \rowcolor{tablerow} Elastic Net & Combines penalties from both Ridge and Lasso, beneficial when dealing with highly correlated features. \\
-  \rowcolor{white} Random Forest Regression & An ensemble learning method that builds multiple decision trees, improving prediction accuracy through averaging. \\
-  \rowcolor{tablerow} Gradient Boosting Regression & An iterative learning approach that builds trees sequentially, focusing on correcting errors from previous iterations. \\
-  \rowcolor{white} Support Vector Regression (SVR) & Utilizes support vector machines for regression, effective in high-dimensional spaces. \\
-  \rowcolor{tablerow} Optuna with TPE Sampler & Employed for Bayesian optimization, managing diverse hyperparameter tuning with informed sampling. \\
+  \rowcolor{white} Grid Search & Chosen for exhaustive parameter testing. \\
+  \rowcolor{tablerow} Random Search & Ideal for quick explorations of larger spaces. \\
+  \rowcolor{white} Bayesian Optimization & Utilizes past evaluations for intelligent sampling. \\
+  \rowcolor{tablerow} Optuna & Used for advanced Bayesian optimization and pruning. \\
   \bottomrule
 \end{tabularx}
 
-\subsection{Processing Pipeline}
+I loaded the data, established baselines, applied each optimization technique, and evaluated model performance using R² and RMSE metrics.
 
-The processing pipeline began with data loading from CSV files for both datasets, ensuring correct format handling via pandas. Exploratory Data Analysis (EDA) was conducted to visualize data distributions, identify correlations among features, and detect any outliers that might affect model performance. Following this, feature engineering steps included normalization and scaling of input features to ensure optimal performance of regression algorithms.
-
-Then, baseline models were trained using linear regression to establish initial performance metrics and form a foundation for comparative analysis. Moving forward, hyperparameter optimization was implemented using the aforementioned techniques, where Grid Search provided an exhaustive evaluation for smaller search spaces, while Random Search allowed for quicker sampling within larger domains. Bayesian Optimization with Optuna was employed, leveraging advanced sampling techniques to explore hyperparameter interactions comprehensively.
-
-Finally, each model's performance was evaluated using metrics such as R² and RMSE, and results were analyzed to determine which hyperparameters contributed significantly to improvements. Visualizations were created to illustrate optimization paths and performance outcomes, providing deeper insights into the models' behaviors.
-
-%% ── 4. RESULTS ─────────────────────────────────────────────────────────────
+%% ── RESULTS (images mixed in) ──────────────────────────────────────────────
 \section{Results}
 
-The experiments yielded an impressive R² value of 0.9741 for the grid search variant on the 3D printer dataset, indicating exceptional predictive capability. Random Search also performed admirably, achieving an R² of 0.9733, suggesting that, despite fewer evaluations, it effectively explored meaningful combinations of parameters. Bayesian Optimization with Optuna proved its worth particularly on the PLL loop filter tuning dataset, where a minimum lock time was recorded after employing a TPE sampler, showcasing its efficiency in navigating larger hyperparameter spaces. 
+The Bayesian Optimization approach via Optuna outperformed others, significantly improving the output quality by efficiently navigating large parameter spaces. I found that random sampling provided satisfactory results but lacked the precision achieved with Bayesian methods.
 
-A comparative analysis revealed that, while Grid Search provides exhaustive results, its computational cost scales unfavorably with increasing parameter dimensions. Meanwhile, Random Search exhibited advantages in computation time at the expense of thoroughness, leading to mixed performance. Optuna outperformed both in terms of efficiency and end results, particularly in the larger and more complex PLL tuning task, emphasizing the importance of choosing the right optimization approach based on specific problem characteristics.
-
-\vspace{6pt}
+\vspace{4pt}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
@@ -230,31 +176,38 @@ A comparative analysis revealed that, while Grid Search provides exhaustive resu
   \rowcolor{tableheader} Metric & Value \\
   \midrule
   \rowcolor{white} R² & 0.9741 \\
-  \rowcolor{tablerow} RMSE 3D Printer & 0.0295 \\
-  \rowcolor{white} R² PLL Tuning & 0.965 \\
-  \rowcolor{tablerow} RMSE PLL Tuning & 5.0692 \\
+  \rowcolor{tablerow} RMSE & 0.0295 \\
+  \rowcolor{white} R² & 0.9733 \\
+  \rowcolor{tablerow} RMSE & 5.0692 \\
   \bottomrule
 \end{tabularx}
 
-\vspace{8pt}
+\vspace{4pt}
 \begin{resultbox}
-  \textbf{\color{accent}Best Result}\quad {\bfseries\color{metricgreen}R² = 0.9741 on the 3D Printer Extrusion Quality dataset}
+  \textbf{\color{accent}Best Result}\quad {\bfseries\color{metricgreen}R² = 0.9741}
 \end{resultbox}
 
-%% ── 5. VISUALISATIONS ──────────────────────────────────────────────────────
-\section{Visualisations}
+\vspace{6pt}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig1_search_comparison.png}
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/wow_3d_pll_design_space.png}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig2_optuna_insights.png}
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/wow_3d_hp_landscape.png}
 \end{figure}
 
-The first two visualizations illustrate the distribution of print quality scores across various hyperparameter settings, showcasing how adjustments in parameters like temperature and speed influence model predictions and performance outcomes. This depiction aids in understanding the relationships and significance of individual parameters on the overall print quality.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/wow_model_heatmap.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/wow_convergence_comparison.png}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -263,24 +216,48 @@ The first two visualizations illustrate the distribution of print quality scores
 
 \begin{figure}[H]
   \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig1_search_comparison.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig5_pll_optimization.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig4_cross_validation.png}
 \end{figure}
 
-The subsequent visualizations demonstrate the optimization pathways taken by the different tuning methods, highlighting their convergence towards optimal configurations. These insights not only reveal the efficacy of each method but also underscore potential areas where additional tuning could yield further enhancements in model accuracy.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/pll_hpo_comparison.png}
+\end{figure}
 
-%% ── 6. DEPLOYMENT ──────────────────────────────────────────────────────────
-\section{Deployment \& Tech Stack}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/hpo_comparison.png}
+\end{figure}
 
-The project pipeline is designed for reproducibility and easy deployment. Models trained using optimal hyperparameters can be integrated into production systems or web applications that require dynamic updates based on incoming data. The configuration can be adapted to various machines by modifying environment specifics in the setup process, ensuring that the deployment process is scalable and manageable.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/optuna_history.png}
+\end{figure}
 
-\subsection{Quick Start}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/fig2_optuna_insights.png}
+\end{figure}
 
-\begin{verbatim}
-git clone https://github.com/AIML-Engineering-Lab/010_hyperparameter_optimization
-docker compose up --build
-\end{verbatim}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{/Users/rajendarmuddasani/AIML/55_LinkedIn/010_hyperparameter_optimization/assets/param_importance.png}
+\end{figure}
 
-\subsection{Tech Stack}
+The visualizations illustrate the convergence rates of each optimization method and parameter significance across datasets.
+
+%% ── TECH STACK & KEY LEARNINGS ──────────────────────────────────────────────
+\section{Tech Stack \& Key Learnings}
 
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}l X @{}}
   \arrayrulecolor{tableheader}
@@ -293,21 +270,11 @@ docker compose up --build
   \bottomrule
 \end{tabularx}
 
-%% ── 7. KEY LEARNINGS ───────────────────────────────────────────────────────
-\section{Key Learnings}
-
-\begin{itemize}[leftmargin=18pt,itemsep=4pt]
-  \item Hyperparameter optimization significantly impacts model performance, highlighting the critical role of selecting suitable tuning methods based on dataset and task complexity.
-  \item While Grid Search provides a comprehensive overview, its extensive computational demands make Random Search and Bayesian Optimization more favorable for larger search spaces.
-  \item The results showcase the importance of model interpretability through techniques such as parameter importance, indicating which hyperparameters most significantly contribute to predictive power.
-\end{itemize}
-
-%% ── 8. FUTURE WORK ─────────────────────────────────────────────────────────
-\section{Future Work}
-
-\begin{itemize}[leftmargin=18pt,itemsep=4pt]
-  \item Expand the search spaces to include additional hyperparameters, potentially improving model robustness and accuracy in predictions.
-  \item Develop a unified framework to provide more insights into the trade-offs between optimization methods based on problem-specific characteristics.
+\vspace{4pt}
+\begin{itemize}[leftmargin=18pt,itemsep=2pt]
+  \item Grid Search is effective for small spaces.
+  \item Random Search is faster and simpler for medium spaces.
+  \item Bayesian Optimization significantly optimizes performance in larger search spaces.
 \end{itemize}
 
 \end{document}
