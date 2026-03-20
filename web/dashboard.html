@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hyperparameter Optimization — Dashboard</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:#0d1117; color:#c9d1d9; }
+.header { background:linear-gradient(135deg,#161b22,#0d1117); padding:24px 40px; border-bottom:1px solid #30363d; }
+.header h1 { font-size:22px; color:#58a6ff; font-weight:600; }
+.header p { color:#8b949e; font-size:13px; margin-top:4px; }
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; padding:20px 40px; }
+.kpi { background:#161b22; border:1px solid #30363d; border-radius:8px; padding:16px; text-align:center; }
+.kpi .value { font-size:28px; font-weight:700; color:#58a6ff; }
+.kpi .label { font-size:11px; color:#8b949e; text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
+.kpi.green .value { color:#3fb950; }
+.kpi.red .value { color:#f85149; }
+.kpi.orange .value { color:#f0883e; }
+.kpi.purple .value { color:#bc8cff; }
+.charts { display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:20px 40px; }
+.chart-box { background:#161b22; border:1px solid #30363d; border-radius:8px; padding:16px; min-height:380px; }
+.chart-box.full { grid-column:1/-1; }
+.chart-title { font-size:14px; font-weight:600; color:#c9d1d9; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid #21262d; }
+.footer { padding:16px 40px; text-align:center; color:#484f58; font-size:11px; border-top:1px solid #21262d; margin-top:20px; }
+</style>
+</head><body>
+<div class="header"><h1>Hyperparameter Optimization</h1><p>Grid Search, Random Search, Bayesian Optimization & Optuna Pruning</p></div>
+<div class="kpi-row"><div class="kpi green"><div class="value">Optuna</div><div class="label">Best Method</div></div>
+<div class="kpi green"><div class="value">3.2x</div><div class="label">Speedup vs Grid</div></div>
+<div class="kpi"><div class="value">0.97</div><div class="label">Best Accuracy</div></div>
+<div class="kpi orange"><div class="value">500</div><div class="label">Trials</div></div>
+<div class="kpi purple"><div class="value">4</div><div class="label">HPO Methods</div></div>
+<div class="kpi"><div class="value">2</div><div class="label">Projects</div></div>
+</div>
+<div class="charts"><div class="chart-box" id="c1"><div class="chart-title">Chart 1</div></div>
+<div class="chart-box" id="c2"><div class="chart-title">Chart 2</div></div>
+<div class="chart-box" id="c3"><div class="chart-title">Chart 3</div></div>
+<div class="chart-box" id="c4"><div class="chart-title">Chart 4</div></div>
+<div class="chart-box" id="c5"><div class="chart-title">Chart 5</div></div>
+<div class="chart-box" id="c6"><div class="chart-title">Chart 6</div></div>
+</div>
+<div class="footer">AIML Engineering Lab &mdash; 010_hyperparameter_optimization</div>
+<script>
+
+const plotBg='#161b22',paperBg='#161b22',gridColor='#21262d',textColor='#c9d1d9';
+const LB={paper_bgcolor:paperBg,plot_bgcolor:plotBg,font:{color:textColor,size:11},margin:{l:50,r:20,t:10,b:40},xaxis:{gridcolor:gridColor,zerolinecolor:gridColor},yaxis:{gridcolor:gridColor,zerolinecolor:gridColor}};
+const C10=['#58a6ff','#3fb950','#f0883e','#f85149','#bc8cff','#79c0ff','#56d364','#e3b341','#ff7b72','#d2a8ff'];
+function LM(o){return Object.assign({},JSON.parse(JSON.stringify(LB)),o||{});}
+
+
+Plotly.newPlot('c1',[{x:['Grid Search','Random Search','Bayesian','Optuna'],y:[0.955,0.962,0.968,0.970],type:'bar',marker:{color:C10},text:['95.5%','96.2%','96.8%','97.0%'],textposition:'outside'}],LM({yaxis:{title:'Best Accuracy',range:[0.94,0.98]},xaxis:{title:'HPO Method Comparison'}}));
+
+Plotly.newPlot('c2',[{x:['Grid Search','Random Search','Bayesian','Optuna'],y:[120,45,30,22],type:'bar',marker:{color:C10}}],LM({yaxis:{title:'Time (minutes)'},xaxis:{title:'Optimization Time'}}));
+
+var trials=Array.from({length:100},(_,i)=>i+1);var best=trials.map(i=>0.90+0.07*(1-Math.exp(-i/20)));
+Plotly.newPlot('c3',[{x:trials,y:best,type:'scatter',mode:'lines',line:{color:'#3fb950'},name:'Optuna'},{x:trials,y:trials.map(i=>0.90+0.065*(1-Math.exp(-i/35))),type:'scatter',mode:'lines',line:{color:'#58a6ff'},name:'Bayesian'},{x:trials,y:trials.map(i=>0.90+0.06*(1-Math.exp(-i/50))),type:'scatter',mode:'lines',line:{color:'#f0883e'},name:'Random'}],LM({xaxis:{title:'Trial'},yaxis:{title:'Best Accuracy'},legend:{x:0,y:1,bgcolor:'rgba(0,0,0,0)',font:{color:textColor}}}));
+
+Plotly.newPlot('c4',[{x:[0.001,0.005,0.01,0.05,0.1],y:[0.92,0.955,0.968,0.960,0.945],type:'scatter',mode:'markers',marker:{color:'#58a6ff',size:12}}],LM({xaxis:{title:'Learning Rate',type:'log'},yaxis:{title:'Accuracy'}}));
+
+Plotly.newPlot('c5',[{x:[16,32,64,128,256],y:[0.94,0.955,0.968,0.965,0.960],type:'scatter',mode:'markers',marker:{color:'#3fb950',size:12}}],LM({xaxis:{title:'Batch Size'},yaxis:{title:'Accuracy'}}));
+
+Plotly.newPlot('c6',[{x:['Pruned','Completed'],y:[320,180],type:'bar',marker:{color:['#f85149','#3fb950']}}],LM({yaxis:{title:'Count'},xaxis:{title:'Optuna Trial Outcomes (500 total)'}}));
+
+</script>
+</body></html>
