@@ -40,5 +40,4 @@ Thumbs.db
 *.log
 logs/
 
-# Personal/private content (not for GitHub)
-personal_docs/
+
