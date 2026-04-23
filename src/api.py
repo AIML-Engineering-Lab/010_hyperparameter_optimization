@@ -2,11 +2,14 @@
 FastAPI serving endpoint for Hyperparameter Optimization.
 POST features -> model prediction.
 """
+import logging
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib
 import pandas as pd
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Hyperparameter Optimization API", version="1.0.0")
 
@@ -54,7 +57,8 @@ def predict(input_data: PredictionInput):
         pred = model.predict(df)[0]
         return PredictionResponse(prediction=float(pred))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Prediction failed: %s", e)
+        raise HTTPException(status_code=500, detail="Internal server error") from e
 
 
 if __name__ == "__main__":
