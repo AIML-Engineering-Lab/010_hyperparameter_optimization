@@ -54,7 +54,7 @@ def predict(input_data: PredictionInput):
         pred = model.predict(df)[0]
         return PredictionResponse(prediction=float(pred))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e
 
 
 if __name__ == "__main__":
