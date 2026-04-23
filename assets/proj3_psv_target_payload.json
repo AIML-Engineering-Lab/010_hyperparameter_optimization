@@ -1,0 +1,68 @@
+{
+  "strict_target_cv_r2": 0.927,
+  "story_target_cv_r2": 0.927,
+  "strict_target_rows": [
+    {
+      "Method": "Grid",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.934110597284101,
+      "Eval Needed": 38,
+      "Est. Time To Hit (s)": 34.796762671532925,
+      "Final R2": 0.9420354682645737,
+      "Final RMSE": 7.058769496495264
+    },
+    {
+      "Method": "Random",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.9330292711463631,
+      "Eval Needed": 27,
+      "Est. Time To Hit (s)": 7.086701115088072,
+      "Final R2": 0.9394886011763014,
+      "Final RMSE": 7.212177898058539
+    },
+    {
+      "Method": "Optuna",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.9358841907238281,
+      "Eval Needed": 7,
+      "Est. Time To Hit (s)": 3.1646493549988373,
+      "Final R2": 0.9436002772744158,
+      "Final RMSE": 6.9628384489142885
+    }
+  ],
+  "story_target_rows": [
+    {
+      "Method": "Grid",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.934110597284101,
+      "Eval Needed": 38,
+      "Est. Time To Hit (s)": 34.796762671532925,
+      "Final R2": 0.9420354682645737,
+      "Final RMSE": 7.058769496495264
+    },
+    {
+      "Method": "Random",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.9330292711463631,
+      "Eval Needed": 27,
+      "Est. Time To Hit (s)": 7.086701115088072,
+      "Final R2": 0.9394886011763014,
+      "Final RMSE": 7.212177898058539
+    },
+    {
+      "Method": "Optuna",
+      "Dims Searched": 8,
+      "Target CV R2": 0.927,
+      "Peak CV R2": 0.9358841907238281,
+      "Eval Needed": 7,
+      "Est. Time To Hit (s)": 3.1646493549988373,
+      "Final R2": 0.9436002772744158,
+      "Final RMSE": 6.9628384489142885
+    }
+  ]
+}

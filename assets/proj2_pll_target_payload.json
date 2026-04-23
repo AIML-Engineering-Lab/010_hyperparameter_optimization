@@ -1,0 +1,62 @@
+{
+  "strict_target_cv_r2": 0.965,
+  "story_target_cv_r2": 0.965,
+  "strict_target_rows": [
+    {
+      "Method": "Grid",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9652524986870415,
+      "Eval Needed": 25,
+      "Est. Time To Hit (s)": 5.763928302250861,
+      "Final R2": 0.9659481096131213,
+      "Final RMSE": 4.999001408817651
+    },
+    {
+      "Method": "Random",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9652531265358183,
+      "Eval Needed": 4,
+      "Est. Time To Hit (s)": 0.8851555633591488,
+      "Final R2": 0.9664253600729497,
+      "Final RMSE": 4.963846323662205
+    },
+    {
+      "Method": "Optuna",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9653643885759493,
+      "Eval Needed": 11,
+      "Est. Time To Hit (s)": 4.4459817096203915,
+      "Final R2": 0.9661592746446852,
+      "Final RMSE": 4.983477220437165
+    }
+  ],
+  "story_target_rows": [
+    {
+      "Method": "Grid",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9652524986870415,
+      "Eval Needed": 25,
+      "Est. Time To Hit (s)": 5.763928302250861,
+      "Final R2": 0.9659481096131213,
+      "Final RMSE": 4.999001408817651
+    },
+    {
+      "Method": "Random",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9652531265358183,
+      "Eval Needed": 4,
+      "Est. Time To Hit (s)": 0.8851555633591488,
+      "Final R2": 0.9664253600729497,
+      "Final RMSE": 4.963846323662205
+    },
+    {
+      "Method": "Optuna",
+      "Target CV R2": 0.965,
+      "Peak CV R2": 0.9653643885759493,
+      "Eval Needed": 11,
+      "Est. Time To Hit (s)": 4.4459817096203915,
+      "Final R2": 0.9661592746446852,
+      "Final RMSE": 4.983477220437165
+    }
+  ]
+}

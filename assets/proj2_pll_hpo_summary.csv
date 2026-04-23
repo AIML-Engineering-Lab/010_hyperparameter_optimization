@@ -1,0 +1,5 @@
+Method,Protocol,R2,RMSE,Time (s),Evals,CV Fits,Best Params
+Baseline,default fit,0.96464504854016,5.0937516696884435,0.3701580829801969,1,1,default
+Grid,shared 3-param space · 3-fold CV · 100-eval budget,0.9659481096131213,4.999001408817651,23.055713209003443,100,300,"{'learning_rate': 0.08, 'max_depth': 2, 'n_estimators': 220}"
+Random,shared 3-param space · 3-fold CV · 100-eval budget,0.9664253600729497,4.963846323662205,22.12888908397872,100,300,"{'learning_rate': 0.06557447910039482, 'max_depth': 2, 'n_estimators': 266}"
+Optuna,shared 3-param space · 3-fold CV · 100-eval budget,0.9661592746446852,4.983477220437165,40.41801554200356,100,300,"{'n_estimators': 271, 'max_depth': 2, 'learning_rate': 0.0737690750524761}"
